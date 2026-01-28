@@ -12,7 +12,7 @@ body {
     min-height: 100vh;
 }
 
-/* Header */
+
 .header {
     background: white;
     padding: 20px 60px;
@@ -214,4 +214,5 @@ body {
 .footer .map-text {
     color: #8BC4E8;
 }
+
 
