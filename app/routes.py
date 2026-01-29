@@ -1,9 +1,10 @@
 from app import app, db, login_manager
-from app.models import User
-from flask_login import login_required, login_user, logout_user
-from flask import render_template, request, redirect, url_for, flash, make_response, session
+from app.models import User, Pet
+from flask_login import login_required, login_user, logout_user, current_user
+from flask import render_template, request, redirect, url_for, flash, make_response, session, jsonify
 from email_validator import validate_email, EmailNotValidError
 from app.UserLogin import UserLogin
+
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -12,19 +13,23 @@ def load_user(user_id):
         return UserLogin(user)
     return None
 
+
 @app.route("/")
 def index():
-    return "Головна"
+    return render_template("golovna.html")
+
 
 @app.route("/profile")
 @login_required
 def profile():
-    return render_template("Профіль")
+    return "Профіль"
+
 
 @app.route("/settings")
 @login_required
 def settings():
-    return render_template("Налаштування")
+    return "Налаштування"
+
 
 @app.route("/register", methods=["POST", "GET"])
 def register():
@@ -61,6 +66,7 @@ def register():
             return redirect("/login")
     return render_template('registration.html')
 
+
 @app.route("/login", methods=["POST", "GET"])
 def login():
     if request.method == "POST":
@@ -79,6 +85,7 @@ def login():
             flash("Невірний email або пароль", "error")
     return render_template('login.html')
 
+
 @app.route('/logout')
 @login_required
 def logout():
@@ -88,17 +95,20 @@ def logout():
     res.set_cookie("logged", "", 0)
     return res
 
+
+@app.route("/map_mark")
+@login_required
+def map_mark():
+    return render_template("map2.html")
+
+
 @app.route("/marks")
 @login_required
-def profile():
-    return render_template("Помітки")
+def marks():
+    return "Відмітки"
 
-@app.route("/news")
-@login_required
-def profile():
-    return render_template("Новини")
 
 @app.route("/map")
 @login_required
-def profile():
-    return render_template("Карта")
+def map():
+    return render_template("map.html")
