@@ -18,7 +18,9 @@ login_manager.login_message = "Авторизуйтесь"
 login_manager.login_message_category = "success"
 
 from app import routes
+from app import api
 
 # Створення таблиць
 with app.app_context():
+
     db.create_all()
