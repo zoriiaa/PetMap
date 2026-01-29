@@ -16,7 +16,7 @@ def load_user(user_id):
 
 @app.route("/")
 def index():
-    return render_template("golovna.html")
+    return render_template("index.html")
 
 
 @app.route("/profile")
@@ -112,3 +112,4 @@ def marks():
 @login_required
 def map():
     return render_template("map.html")
+
