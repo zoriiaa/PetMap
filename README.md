@@ -11,3 +11,6 @@
 2. Синицина Оксана - Frontend developer (JS)
 3. Любаневич Анастасія - Backend developer (Python, Flask)
 4. Глушко Марія - Frontend developer (HTML/CSS)
+
+[**Дизайн PetMap**](https://www.canva.com/design/DAG_6ET8S2Y/253cHTQAIJ-8lyaPiVTNlA/view?utm_content=DAG_6ET8S2Y&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=he2de93f645)
+[**Owerview проекту**](https://www.canva.com/design/DAG_oXznBIA/qDhi-85sLHrReOrNtKz57g/view?utm_content=DAG_oXznBIA&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h5291b97953)
