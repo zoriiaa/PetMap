@@ -41,6 +41,10 @@ body {
     font-weight: 800;
 }
 
+.header .map-text {
+    color: #8BC4E8;
+}
+
 .menu {
     display: flex;
     gap: 80px;
@@ -292,5 +296,6 @@ textarea:focus {
 .footer .map-text {
     color: #8BC4E8;
 }
+
 
 
