@@ -6,7 +6,7 @@ from sqlalchemy import  func
 
 
 class User(db.Model):
-    tablename = 'users'
+    __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(20), nullable=False)
@@ -51,5 +51,7 @@ class Pet(db.Model):
             'photo': self.photo_name,
             'status': self.status,
             'process_status':self.process_status,
-            'date': self.timestamp.strftime('%Y-%m-%d')
+            'date': self.timestamp.strftime('%Y-%m-%d'),
+            'user_id': self.user_id,
+            'author_email': self.user.email if self.user else "support@petmap.com"
         }
