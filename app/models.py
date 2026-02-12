@@ -46,6 +46,7 @@ class Pet(db.Model):
             'name': self.name,
             'species': self.species,
             'breed': self.breed,
+            'description':self.description,
             'lat': self.lat,
             'lng': self.lng,
             'photo': self.photo_name,
