@@ -3,49 +3,56 @@
     <head>
         <meta charset="UTF-8">
         <title>PetMap</title>
-        <link rel="stylesheet" href="static/css/map2.css">
+        <link rel="stylesheet" href="map2.css" />
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     </head>
     <body>
         <div class="header">
             <div class="logo">
-                <img src="static/img/logo.svg" alt="PetMap Logo" class="logo-icon">
+                <img src="logo.svg" alt="PetMap Logo" class="logo-icon">
                 <span>Pet<span class="map-text">Map</span></span>
             </div>
             <nav class="menu">
                 <a href="#" class="menu-item">
-                    <img src="static/img/House2.svg" alt="House logo">
+                    <img src="House2.svg" alt="House logo">
                     <span>Головна</span>
                 </a>
                 <a href="#" class="menu-item active">
-                    <img src="static/img/Label2.svg" alt="Label logo">
+                    <img src="Label2.svg" alt="Label logo">
                     <span>Карта</span>
                 </a>
                 <a href="#" class="menu-item">
-                    <img src="static/img/User.svg" alt="user logo">
+                    <img src="User.svg" alt="user logo">
                     <span>Профіль</span>
                 </a>
             </nav>
         </div>
 
         <div class="map-container">
-
+            <div id="map">
+                <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+                </script>
+            </div>
         </div>
 
-
-        <button class="back-btn">Повернутись в режим перегляду</button>
+        
+        <a href="map.html" class="back-btn">Повернутись в режим перегляду</a>
 
         <button class="photo-btn">
             <div class="icon-group">
-                <img src="static/img/Vector.svg" alt="Позначка">
-                <img src="static/img/Plus circle.svg" alt="Плюс">
+                <img src="Vector.svg" alt="Позначка">
+                <img src="Plus circle.svg" alt="Плюс">
             </div>
             <span>Додати тварину</span>
         </button>
 
-
+        
         <div class="footer">
-            <img src="static/img/logo.svg" alt="PetMap Logo" class="logo-icon">
+            <img src="logo.svg" alt="PetMap Logo" class="logo-icon">
             <span>Pet<span class="map-text">Map</span></span>
         </div>
+
+        <script src="map2.js"></script>
+
     </body>
 </html>
