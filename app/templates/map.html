@@ -3,26 +3,26 @@
     <head>
         <meta charset="UTF-8">
         <title>PetMap</title>
-        <link rel="stylesheet" href="map.css" />
+        <link rel="stylesheet" href="static/css/map.css" />
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />  
     </head>
     <body>
         <div class="header">
             <div class="logo">
-                <img src="logo.svg" alt="PetMap Logo" class="logo-icon">
+                <img src="static/img/logo.svg" alt="PetMap Logo" class="logo-icon">
                 <span>Pet<span class="map-text">Map</span></span>
             </div>
             <nav class="menu">
-                <a href="#" class="menu-item">
-                    <img src="House2.svg" alt="House logo">
+                <a href="/" class="menu-item">
+                    <img src="static/img/House2.svg" alt="House logo">
                     <span>Головна</span>
                 </a>
-                <a href="#" class="menu-item active">
-                    <img src="Label2.svg" alt="Label logo">
+                <a href="/map" class="menu-item active">
+                    <img src="static/img/Label2.svg" alt="Label logo">
                     <span>Карта</span>
                 </a>
-                <a href="#" class="menu-item">
-                    <img src="User.svg" alt="user logo">
+                <a href="/profile" class="menu-item">
+                    <img src="static/img/User.svg" alt="user logo">
                     <span>Профіль</span>
                 </a>
             </nav>
@@ -41,15 +41,20 @@
             </div>
         </div>
 
-        <a href="map2.html" class="add-animal-btn">Додати тварину на карту</a>
+        <button class="add-animal-btn" onclick="window.location.href='{{ url_for('map_mark') }}'">
+          Додати тварину на карту →
+        </button>
+
+        <a href="templates/map2.html" class="add-animal-btn">Додати тварину на карту</a>
 
         
         <div class="footer">
-            <img src="logo.svg" alt="PetMap Logo" class="logo-icon">
+            <img src="static/img/logo.svg" alt="PetMap Logo" class="logo-icon">
             <span>Pet<span class="map-text">Map</span></span>
         </div>
-        <script src="map.js"></script>
+        <script src="static/js/map.js"></script>
 
     </body>
 </html>
+
 
