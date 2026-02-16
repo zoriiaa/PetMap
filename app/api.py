@@ -2,33 +2,43 @@ from flask import jsonify, request
 from flask_login import login_required, current_user
 from app import app, db
 from app.models import Pet
+import os
+from werkzeug.utils import secure_filename
 
+UPLOAD_FOLDER = os.path.join(app.root_path, 'static', 'uploads')
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'webp'}
+
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
+def save_photo(file):
+    """Зберігає фото у папку uploads, повертає ім'я файлу або None"""
+    if not file or file.filename == '':
+        return None
+    if not allowed_file(file.filename):
+        return None
+    filename = secure_filename(file.filename)
+    file.save(os.path.join(UPLOAD_FOLDER, filename))
+    return filename
 
 # GET /api/pets - отримання всіх тварин
 @app.route("/api/pets", methods=['GET'])
 def get_pets():
     """API для отримання геоданих всіх тварин"""
     try:
-        # Отримання параметрів фільтрації (опціонально)
         status = request.args.get('status')
-        process_status = request.args.get('process_status')
-        species = request.args.get('species')
 
-        # Базовий запит
         query = Pet.query
 
-        # Застосування фільтрів (якщо передані)
         if status:
             query = query.filter_by(status=status)
-        if process_status:
-            query = query.filter_by(process_status=process_status)
-        if species:
-            query = query.filter_by(species=species)
 
-        # Виконання запиту
         pets = query.all()
 
-        # Повернення даних через jsonify
         return jsonify([pet.to_dict() for pet in pets]), 200
 
     except Exception as e:
@@ -43,7 +53,6 @@ def add_pet():
     try:
         data = request.get_json()
 
-        # Валідація обов'язкових полів
         if not data.get('lat') or not data.get('lng'):
             return jsonify({
                 'success': False,
@@ -56,7 +65,11 @@ def add_pet():
                 'error': 'Вид тварини обов\'язковий'
             }), 400
 
-        # Створення нової тварини
+        photo_name = None
+        if 'photo' in request.files:
+            photo_name = save_photo(request.files['photo'])
+
+        # Створення тварини
         pet = Pet(
             name=data.get('name'),
             species=data.get('species'),
@@ -64,9 +77,9 @@ def add_pet():
             description=data.get('description'),
             lat=float(data['lat']),
             lng=float(data['lng']),
-            photo_name=data.get('photo_name'),
+            photo_name=photo_name,
             status=data.get('status', 'lost'),
-            process_status=data.get('process_status', 'active'),
+            process_status='active',
             user_id=current_user.get_id()
         )
 
@@ -155,6 +168,12 @@ def update_pet(pet_id):
             pet.lat = float(data['lat'])
         if 'lng' in data:
             pet.lng = float(data['lng'])
+
+            # Оновлення фото якщо передали нове
+        if 'photo' in request.files and request.files['photo'].filename != '':
+            new_photo = save_photo(request.files['photo'])
+            if new_photo:
+                pet.photo_name = new_photo
 
         db.session.commit()
 
