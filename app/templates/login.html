@@ -12,53 +12,78 @@
                 <h1>Pet<span>Map</span></h1>
                 <p>Вітаємо знову!</p>
             </div>
-
+    
             <div class="card">
                 <div class="tabs">
-                    <button class="tab active">Вхід</button>
-                    <button class="tab">Реєстрація</button>
+                    <a href="{{ url_for('login') }}"
+                    class="tab {% if request.endpoint == 'login' %}active{% endif %}">
+                     Вхід
+                 </a>
+         
+                 <a href="{{ url_for('register') }}"
+                    class="tab {% if request.endpoint == 'register' %}active{% endif %}">
+                     Реєстрація
+                 </a>
                 </div>
+            
 
-                <!-- Flash Messages -->
-                {% with messages = get_flashed_messages(with_categories=true) %}
-                    {% if messages %}
-                        {% for category, message in messages %}
-                            <div class="alert alert-{{ category }}">
-                                {{ message }}
-                            </div>
-                        {% endfor %}
-                    {% endif %}
-                {% endwith %}
-
+            <!-- Flash Messages -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">
+            {{ message }}
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+    
                 <form method="POST" action="">
                     <label>Email</label>
                     <div class="input-wrapper">
                         <img src="static/img/Mail.svg" alt="Mail Logo" class="mail-icon">
                         <input type="email" name="email" placeholder="example@gmail.com" required>
                     </div>
-
+    
                     <label>Пароль</label>
                     <div class="input-wrapper">
                         <img src="static/img/Lock.svg" alt="lock Logo" class="lock-icon">
                         <input type="password" name="psw" placeholder="••••••••" required>
                         <img src="static/img/Eye.svg" alt="eye Logo" class="eye-icon">
+                    </label>
                     </div>
-
+    
                     <div class="remember">
                         <input type="checkbox" name="remember" id="remember">
                         <label for="remember"><span>Запам'ятати мене</span></label>
                     </div>
-
+    
                     <button type="submit">Увійти</button>
                 </form>
             </div>
-
+        </div>
+    
             <div class="footer">
                 <div class="footer-logo">
                     <img src="static/img/logo.svg" alt="PetMap Logo" class="logo-icon">
                     <span>Pet<span class="map-text">Map</span></span>
                 </div>
             </div>
-        </div>
+
+
+            <script>
+                const togglePassword = document.getElementById('togglePassword');
+                const passwordInput = document.getElementById('passwordInput');
+                
+                togglePassword.addEventListener('click', function() {
+                    if (passwordInput.type === 'password') {
+                        passwordInput.type = 'text';
+                    } else {
+                        passwordInput.type = 'password';
+                    }
+
+                    passwordInput.blur(); 
+                });
+            </script>
     </body>
 </html>
