@@ -12,15 +12,15 @@
                 <span>Pet<span class="map-text">Map</span></span>
             </div>
             <nav class="menu">
-                <a href="#" class="menu-item">
+                <a href="/" class="menu-item">
                     <img src="static/img/House2.svg" alt="House logo">
                     <span>Головна</span>
                 </a>
-                <a href="#" class="menu-item">
+                <a href="/map" class="menu-item">
                     <img src="static/img/Label.svg" alt="Label logo">
                     <span>Карта</span>
                 </a>
-                <a href="#" class="menu-item active">
+                <a href="/profile" class="menu-item active">
                     <img src="static/img/User2.svg" alt="user logo">
                     <span>Профіль</span>
                 </a>
@@ -119,10 +119,13 @@
             <span>Pet<span class="map-text">Map</span></span>
         </div>
         
-
-       <script src="static/js/add.js"></script>
-            
+    <script>
+        const userId = {{ user_id }};
+    </script>
+    <script src="/static/js/profile.js"></script>
+    <script src="/static/js/add.js"></script>    
         
     </body>
 
 </html>
+
