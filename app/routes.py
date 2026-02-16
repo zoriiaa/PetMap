@@ -103,12 +103,6 @@ def map_mark():
     return render_template("map2.html")
 
 
-@app.route("/marks")
-@login_required
-def marks():
-    return render_template("marks.html")
-
-
 @app.route("/map")
 @login_required
 def map():
@@ -125,3 +119,4 @@ def pet_form_add():
 @login_required
 def pet_form():
     return render_template("pet_form.html")
+
