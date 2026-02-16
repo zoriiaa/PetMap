@@ -75,7 +75,7 @@ async function loadPets() {
                         <div class="pet-process">
                             ${pet.process_status || ""}
                         </div>
-                        <div class="pet-contact">
+                        <div class="pet-contact" data-id="{{ pet.id }}">
                             Звʼязатися з автором
                         </div>
                     </div>
@@ -137,7 +137,7 @@ async function loadFilteredPets() {
                         <div class="pet-process">
                             ${pet.process_status || ""}
                         </div>
-                        <div class="pet-contact">
+                        <div class="pet-contact" data-id="{{ pet.id }}">
                             Звʼязатися з автором
                         </div>
                     </div>
@@ -186,4 +186,17 @@ document.getElementById("btnFilters").onclick = () => {
     const panel = document.getElementById("filtersPanel");
     panel.style.display = panel.style.display === "none" ? "flex" : "none";
 };
+
+document.addEventListener("click", async function (e) {
+    if (e.target.classList.contains("pet-contact")) {
+        const petId = e.target.dataset.id;
+
+        const res = await fetch(`/api/pet/${petId}`);
+        const data = await res.json();
+
+        window.location.href = `mailto:${data.author_email}`;
+    }
+});
+
+
 
