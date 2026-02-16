@@ -33,7 +33,9 @@
                     <h1>Кожна відмітка на мапі -</h1>
                     <h2>шанс на життя</h2>
                     <p>Позначайте локацію, змінюйте статуси та координуйте допомогу в реальному часі.</p>
-                    <button class="cta-button">Перейти до карти →</button>
+                    <button class="cta-button" onclick="window.location.href='{{ url_for('map') }}'">
+                  Перейти до карти →
+                   </button>
                 </div>
                 <div class="hero-images">
                     <img src="static/img/image 11.png" alt="Кіт" class="pet-image small">
@@ -49,4 +51,7 @@
         </div>
     </body>
 </html>
+
+
+
 
