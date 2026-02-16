@@ -22,13 +22,14 @@ def index():
 @app.route("/profile")
 @login_required
 def profile():
-    return "Профіль"
+    pets = Pet.query.filter_by(user_id=current_user.get_id()).order_by(Pet.timestamp.desc()).all()
+    return render_template("profile.html", pets=pets)
 
 
 @app.route("/settings")
 @login_required
 def settings():
-    return "Налаштування"
+    return render_template("settings.html")
 
 
 @app.route("/register", methods=["POST", "GET"])
@@ -105,7 +106,7 @@ def map_mark():
 @app.route("/marks")
 @login_required
 def marks():
-    return "Відмітки"
+    return render_template("marks.html")
 
 
 @app.route("/map")
@@ -113,3 +114,14 @@ def marks():
 def map():
     return render_template("map.html")
 
+@app.route("/pet/add")
+@login_required
+def pet_form_add():
+    lat = request.args.get('lat')
+    lng = request.args.get('lng')
+    return render_template("pet_form.html", lat=lat, lng=lng)
+
+@app.route("/pet/edit")
+@login_required
+def pet_form():
+    return render_template("pet_form.html")
