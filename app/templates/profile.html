@@ -12,15 +12,15 @@
                 <span>Pet<span class="map-text">Map</span></span>
             </div>
             <nav class="menu">
-                <a href="#" class="menu-item">
+                <a href="/" class="menu-item">
                     <img src="static/img/House2.svg" alt="House logo">
                     <span>Головна</span>
                 </a>
-                <a href="#" class="menu-item">
+                <a href="/map" class="menu-item">
                     <img src="static/img/Label.svg" alt="Label logo">
                     <span>Карта</span>
                 </a>
-                <a href="#" class="menu-item active">
+                <a href="/profile" class="menu-item active">
                     <img src="static/img/User2.svg" alt="user logo">
                     <span>Профіль</span>
                 </a>
@@ -54,25 +54,10 @@
                         Налаштування
                     </button>
                 </div>
+
+
+                <div id="petsContainer"></div>
                 
-        
-                    <div class="animals-list">
-                        <div class="animal-card">
-                            <img src="static/img/image 8.png" alt="Рудi" class="animal-photo">
-                            <div class="animal-info">
-                                <div class="animal-header">
-                                    <h3>Рудi</h3>
-                                    <span class="status-badge status-saved">Загублена</span>
-                                </div>
-                                <p class="animal-type">Кіт</p>
-                                <p class="animal-desc">Рудий котик, домашній , має червоний нашийник</p>
-                                <p class="animal-date">Додано: <span>27-01-2026</span></p>
-                            </div>
-                            <div class="animal-actions">
-                                <button class="btn-edit">Редагувати</button>
-                                <button class="btn-view">Переглянути</button>
-                            </div>
-                        </div>
         
                         <div class="animal-card">
                             <img src="static/img/image 9.png" alt="Лакі" class="animal-photo">
@@ -119,10 +104,14 @@
             <span>Pet<span class="map-text">Map</span></span>
         </div>
         
-
-       <script src="static/js/add.js"></script>
-            
+    <script>
+        const userId = {{ user_id }};
+    </script>
+    <script src="/static/js/profile.js"></script>
+    <script src="/static/js/add.js"></script>    
         
     </body>
 
 </html>
+
+

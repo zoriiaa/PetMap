@@ -200,10 +200,102 @@ body {
 
 
 
-.animals-list {
+.petsContainer {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 15px;
+    background: #F3F4F6;
+    border-radius: 40px ;
+}
+
+.pet-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #FFFFFF;
+    padding: 15px;
+    border-radius: 15px;
+}
+
+.pet-left {
+    width: 200px;
+}
+
+.pet-image {
+    width: 168px;
+    height: 168px;
+    object-fit: cover;
+    border-radius: 13px;
+}
+
+.pet-middle {
+    flex: 1;
+    margin-left: 15px;
+    flex-direction: column;
+}
+
+.pet-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.status {
+    padding: 3px 10px;
+    border-radius: 13px;
+    font-size: 16px;
+    color: white;
+}
+
+.status.lost {
+    background: #FF7B7B;
+}
+
+.status.found {
+    background: #87C893;
+}
+
+.species {
+    padding: 3px 10px;
+    border-radius: 16px;
+    font-size: 16px;
+    color: white;
+    background: #8BC4E8;
+}
+
+.pet-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    height: 150px;
+}
+
+.bread {
+    color: #73706D;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.description {
+    color: #73706D;
+    font-size: 18px;
+}
+
+.pet-right {
+    display: flex;
+    align-items: center;
+}
+
+.pet-right button {
+    background: #FFD182;
+    border: none;
+    padding: 6px 10px;
+    margin-right: 20px;
+    border-radius: 13px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 20px;
 }
 
 .animal-card {
@@ -394,4 +486,5 @@ body {
 
 .footer .map-text {
     color: #8BC4E8;
+
 }
