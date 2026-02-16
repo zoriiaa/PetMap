@@ -12,44 +12,6 @@
                 <h1>Pet<span>Map</span></h1>
                 <p>Вітаємо знову!</p>
             </div>
-
-            <div class="card">
-                <div class="tabs">
-                    <button class="tab active">Вхід</button>
-                    <button class="tab">Реєстрація</button>
-                </div>
-
-                <!-- Flash Messages -->
-                {% with messages = get_flashed_messages(with_categories=true) %}
-                    {% if messages %}
-                        {% for category, message in messages %}
-                            <div class="alert alert-{{ category }}">
-                                {{ message }}
-                            </div>
-                        {% endfor %}
-                    {% endif %}
-                {% endwith %}
-
-                <form method="POST" action="">
-                    <label>Email</label>
-                    <div class="input-wrapper">
-                        <img src="static/img/Mail.svg" alt="Mail Logo" class="mail-icon">
-                        <input type="email" name="email" placeholder="example@gmail.com" required>
-                    </div>
-<!DOCTYPE html>
-<html lang="uk">
-    <head>
-        <meta charset="UTF-8">
-        <title>PetMap - Вхід</title>
-        <link rel="stylesheet" href="static/css/login.css">
-    </head>
-    <body>
-        <div class="container">
-            <div class="logo">
-                <img src="static/img/logo.svg" alt="PetMap Logo" class="logo-icon">
-                <h1>Pet<span>Map</span></h1>
-                <p>Вітаємо знову!</p>
-            </div>
     
             <div class="card">
                 <div class="tabs">
@@ -125,4 +87,3 @@
             </script>
     </body>
 </html>
-
