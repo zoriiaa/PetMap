@@ -10,16 +10,23 @@ body {
     font-family: 'Nunito', Arial, sans-serif;
     background-color: #FFFFFF;
     min-height: 100vh;
+    padding-top: 50px;
 }
 
 
 .header {
-    background: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
+    width:100%;
     padding: 20px 60px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: relative;
+    height: 60px;
+    z-index: 1000;
 }
 
 .logo {
@@ -180,3 +187,4 @@ body {
 .footer .map-text {
     color: #8BC4E8;
 }
+
