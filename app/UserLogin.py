@@ -21,4 +21,13 @@ class UserLogin:
         return self.user.name
 
     def get_email(self):
+
+        return self.user.email
+
+    @property
+    def name(self):
+        return self.user.name
+
+    @property
+    def email(self):
         return self.user.email
