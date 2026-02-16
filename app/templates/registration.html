@@ -15,9 +15,17 @@
 
             <div class="card">
                 <div class="tabs">
-                    <button class="tab">Вхід</button>
-                    <button class="tab active">Реєстрація</button>
-                </div>
+                    <a href="{{ url_for('login') }}"
+                    class="tab {{ 'active' if request.path == url_for('login') else '' }}">
+                    Вхід
+                   </a>
+
+                   <a href="{{ url_for('register') }}"
+                   class="tab {{ 'active' if request.path == url_for('register') else '' }}">
+                   Реєстрація
+                  </a>
+           </div>
+                
                 {% with messages = get_flashed_messages(with_categories=true) %}
                     {% if messages %}
                         {% for category, message in messages %}
