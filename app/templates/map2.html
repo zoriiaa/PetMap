@@ -3,7 +3,8 @@
     <head>
         <meta charset="UTF-8">
         <title>PetMap</title>
-        <link rel="stylesheet" href="static/css/map2.css">
+        <link rel="stylesheet" href="static/css/map2.css" />
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     </head>
     <body>
         <div class="header">
@@ -28,13 +29,18 @@
         </div>
 
         <div class="map-container">
-
+            <div id="map">
+                <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+                </script>
+            </div>
         </div>
 
+        
+        <button class="back-btn" onclick="window.location.href='{{ url_for('map') }}'">
+         Повернутись в режим перегляду
+        </button>
 
-        <button class="back-btn">Повернутись в режим перегляду</button>
-
-        <button class="photo-btn">
+        <button class="photo-btn" onclick="window.location.href='{{ url_for('pet_form') }}'">
             <div class="icon-group">
                 <img src="static/img/Vector.svg" alt="Позначка">
                 <img src="static/img/Plus circle.svg" alt="Плюс">
@@ -42,10 +48,13 @@
             <span>Додати тварину</span>
         </button>
 
-
+        
         <div class="footer">
             <img src="static/img/logo.svg" alt="PetMap Logo" class="logo-icon">
             <span>Pet<span class="map-text">Map</span></span>
         </div>
+
+        <script src="static/js/map2.js"></script>
+
     </body>
 </html>
