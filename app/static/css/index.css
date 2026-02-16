@@ -57,7 +57,7 @@ body {
     align-items: center;
     gap: 8px;
     text-decoration: none;
-    color: #000000;
+    color: #73706D;
     font-size: 20px;
     font-weight: 600;
 }
@@ -214,5 +214,6 @@ body {
 .footer .map-text {
     color: #8BC4E8;
 }
+
 
 
