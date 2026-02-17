@@ -10,16 +10,23 @@ body {
     font-family: 'Nunito', Arial, sans-serif;
     background-color: #FFFFFF;
     min-height: 100vh;
+    padding-top: 50px;
 }
 
 
 .header {
-    background: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
+    width:100%;
     padding: 20px 60px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: relative;
+    height: 60px;
+    z-index: 1000;
 }
 
 .logo {
@@ -46,6 +53,7 @@ body {
 
 .menu {
     display: flex;
+    gap: 40px;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
@@ -82,7 +90,7 @@ body {
     overflow: hidden;
 }
 
-#map {
+.map-image {
     width: 100%;
     height: 85%;
     object-fit: cover;
@@ -105,13 +113,6 @@ body {
     right: 70px;
     z-index: 1000;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-
-a.add-animal-btn,
-a.back-btn {
-    text-decoration: none;
-    display: inline-block;
 }
 
 .photo-btn {
@@ -182,11 +183,6 @@ a.back-btn {
     color: #000000;
     font-weight: 800;
 }
-
-.footer .map-text {
-    color: #8BC4E8;
-}
-
 
 .footer .map-text {
     color: #8BC4E8;

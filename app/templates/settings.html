@@ -1,1 +1,102 @@
+<!DOCTYPE html>
+<html lang="uk">
+    <head>
+        <meta charset="UTF-8">
+        <title>PetMap</title>
+        <link rel="stylesheet" href="static/css/settings.css">
+    </head>
+    <body>
+        <div class="header">
+            <div class="logo">
+                <img src="static/img/logo.svg" alt="PetMap Logo" class="logo-icon">
+                <span>Pet<span class="map-text">Map</span></span>
+            </div>
+            <nav class="menu">
+                <a href="/" class="menu-item">
+                    <img src="static/img/House2.svg" alt="House logo">
+                    <span>Головна</span>
+                </a>
+                <a href="/map" class="menu-item">
+                    <img src="static/img/Label.svg" alt="Label logo">
+                    <span>Карта</span>
+                </a>
+                <a href="/profile" class="menu-item active">
+                    <img src="static/img/User2.svg" alt="user logo">
+                    <span>Профіль</span>
+                </a>
+            </nav>
+        </div>
 
+        <div class="content">
+            <div class="profile-block">
+                <div class="avatar">
+                    <img src="static/img/Ivanna.svg" alt="Avatar">
+                </div>
+                <div class="profile-info">
+                    <h2>Ivanna </h2>
+                    <div class="email-row">
+                        <img src="static/img/Mail Ivanna.svg" alt="mail">
+                        <p> example@gmail.com</p>
+                    </div>
+                </div>
+            </div>
+        
+            
+            
+            <div class="profile-card">
+                <div class="tabs">
+                    <a href="templates/marks.html" class="tab">
+                        <img src="static/img/Logo2.svg" alt="Pin" class="tab-icon">
+                        Додані тварини
+                    </a>
+                    <a href="templates/settings.html" class="tab active">
+                        <img src="static/img/Settings2.svg" alt="Settings" class="tab-icon">
+                        Налаштування
+                    </a>
+                </div>
+
+                <div class="settings-section">
+                    <div class="section-header">
+                        <div class="section-title">
+                            <img src="static/img/User2.svg" alt="user" class="section-icon">
+                            <h3>Персональна інформація</h3>
+                        </div>
+                        <button class="btn-edit-profile">
+                            <img src="static/img/Edit.svg" alt="edit">
+                            Редагувати
+                        </button>
+                    </div>
+
+                    <div class="info-row">
+                        <div class="info-group">
+                            <p class="info-label">Ім'я</p>
+                            <p class="info-value">Іванна</p>
+                        </div>
+                        <div class="info-group">
+                            <p class="info-label">E-mail</p>
+                            <p class="info-value">example@gmail.com</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <div class="section-title">
+                        <img src="static/img/Lock3.svg" alt="lock" class="section-icon">
+                        <h3>Безпека</h3>
+                    </div>
+                    <button class="btn-change-password">Змінити пароль</button>
+                </div>
+                
+                <div class="danger-zone">
+                    <p class="danger-title">Небезпечна зона</p>
+                    <button class="btn-logout">Вийти з акаунту</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <img src="static/img/logo.svg" alt="PetMap Logo" class="logo-icon">
+            <span>Pet<span class="map-text">Map</span></span>
+        </div>
+    </body>
+</html>
