@@ -33,10 +33,10 @@
                     <img src="static/img/Ivanna.svg" alt="Avatar">
                 </div>
                 <div class="profile-info">
-                    <h2>Іванна</h2>
+                    <h2>{{ current_user.name }}</h2>
                     <div class="email-row">
                         <img src="static/img/Mail Ivanna.svg" alt="mail">
-                        <p>example@gmail.com</p>
+                        <p>{{ current_user.email }}</p>
                     </div>
                 </div>
             </div>
@@ -59,42 +59,34 @@
                 <div id="petsContainer"></div>
                 
         
-                        <div class="animal-card">
-                            <img src="static/img/image 9.png" alt="Лакі" class="animal-photo">
-                            <div class="animal-info">
-                                <div class="animal-header">
-                                    <h3>Лакі</h3>
+                    <div class="animals-list">
+                    {% for pet in pets %}
+                    <div class="animal-card">
+                        <img src="{{ 'static/uploads/' + pet.photo_name if pet.photo_name else 'static/img/no-photo.svg' }}" alt="{{ pet.name }}" class="animal-photo">
+                        <div class="animal-info">
+                            <div class="animal-header">
+                                <h3>{{ pet.name or 'Без імені' }}</h3>
+                                {% if pet.status == 'lost' %}
+                                    <span class="status-badge status-saved">Загублена</span>
+                                {% else %}
                                     <span class="status-badge status-found">Знайдена</span>
-                                    <span class="status-badge status-looking">Тимчасово забрали до себе</span>
-                                </div>
-                                <p class="animal-type">Собака</p>
-                                <p class="animal-desc">Темненький, знайшли нещодавно від будинку, має білу пляму на спині</p>
-                                <p class="animal-date">Додано: <span>27-01-2026</span></p>
+                                {% endif %}
+                                {% if pet.process_status != 'active' %}
+                                    <span class="status-badge status-looking">{{ pet.process_status }}</span>
+                                {% endif %}
                             </div>
-                            <div class="animal-actions">
-                                <button class="btn-edit">Редагувати</button>
-                                <button class="btn-view">Переглянути</button>
-                            </div>
+                            <p class="animal-type">{{ pet.species }}</p>
+                            <p class="animal-desc">{{ pet.description }}</p>
+                            <p class="animal-date">Додано: <span>{{ pet.date }}</span></p>
                         </div>
-        
-                        <div class="animal-card">
-                            <img src="static/img/image 10.png" alt="Невідомо" class="animal-photo">
-                            <div class="animal-info">
-                                <div class="animal-header">
-                                    <h3>Невідомо</h3>
-                                    <span class="status-badge status-found">Знайдено</span>
-                                    <span class="status-badge status-help">Веземо у клініку</span>
-                                </div>
-                                <p class="animal-type">Інше</p>
-                                <p class="animal-desc">Знайшли маленького єнота, має проблеми з лапою</p>
-                                <p class="animal-date">Додано: <span>27-01-2026</span></p>
-                            </div>
-                            <div class="animal-actions">
-                                <button class="btn-edit">Редагувати</button>
-                                <button class="btn-view">Переглянути</button>
-                            </div>
+                        <div class="animal-actions">
+                            <button class="btn-edit" onclick="window.location.href='/pet/edit?id={{ pet.id }}'">Редагувати</button>
+                            <button class="btn-view">Переглянути</button>
                         </div>
                     </div>
+                    {% else %}
+                    <p class="no-animals">Ви ще не додали жодної тварини</p>
+                    {% endfor %}
                 </div>
             </div>
         </div>
@@ -113,5 +105,6 @@
     </body>
 
 </html>
+
 
 
