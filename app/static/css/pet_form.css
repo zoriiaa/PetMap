@@ -10,7 +10,7 @@ body {
     font-family: 'Nunito';
     background-color: #F7FAFC;
     min-height: 100vh;
-    padding-top: 50px;
+    padding-top: 150px;
 }
 
 .header {
@@ -84,14 +84,20 @@ body {
     background: white;
     border-radius: 29px;
     padding: 50px;
-    margin: -40px 0 5px;
+    padding-top: 50px;
+    margin: 20px 0 5px;
     width: 881px;
     box-shadow: 0 3px 40px rgba(0, 0, 0, 0.05);
 }
 
 .status-tabs {
+    padding-top: 50px;
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
-    gap: 9px;
+    gap: 13px;
     margin: 90px 0 30px;
     justify-content: center;
 }
@@ -253,8 +259,8 @@ textarea:focus {
 .lost-upload {
     display: none;
     gap: 16px;
-    width: 120px;
-    height: 120px;
+    width: 784px;
+    height: 150px;
     border-radius: 12px;
 }
 
@@ -267,35 +273,12 @@ textarea:focus {
 }
 
 .uploaded-photo img {
-    width: 100%;
-    height: 100%;
+    width: 120px;
+    height: 120px;
     object-fit: cover;
 }
 
-.photo-upload {
-    border: 2px dashed #D9D9D9;
-    border-radius: 12px;
-    padding: 30px;
-    text-align: center;
-    cursor: pointer;
-    background: #FFFFFF;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-}
 
-.photo-upload:hover {
-    border-color: #8BC4E8;
-    background: #F0F9FF;
-}
-
-.photo-upload p {
-    font-size: 14px;
-    color: #73706D;
-}
 
 
 .form-actions {
@@ -404,44 +387,110 @@ textarea:focus {
 }
 
 
-
-#status-switcher:checked ~ .status-tabs .status-found {
-    background: #FFFFFFCC;
-    color: #73706D;
+#found:checked ~ .form-group .found-placeholder {
+    display: block;
 }
 
-#status-switcher:checked ~ .status-tabs .status-lost {
+#found:checked ~ .form-group .lost-placeholder {
+    display: none;
+}
+
+#lost:checked ~ .form-group .found-placeholder {
+    display: none;
+}
+
+#lost:checked ~ .form-group .lost-placeholder {
+    display: block;
+}
+
+
+#found:checked ~ .form-group .found-upload {
+    display: block;
+}
+
+#found:checked ~ .form-group .lost-upload {
+    display: none;
+}
+
+#lost:checked ~ .form-group .found-upload {
+    display: none;
+}
+
+#lost:checked ~ .form-group .lost-upload {
+    display: flex;
+}
+
+
+#found:checked ~ .form-actions .found-submit {
+    display: block;
+}
+
+#found:checked ~ .form-actions .lost-submit {
+    display: none;
+}
+
+#lost:checked ~ .form-actions .found-submit {
+    display: none;
+}
+
+#lost:checked ~ .form-actions .lost-submit {
+    display: block;
+}
+
+
+#found:checked ~ .danger-zone {
+    display: none;
+}
+
+#lost:checked ~ .danger-zone {
+    display: block;
+}
+
+
+#found:checked ~ .status-tabs .status-tab[for="found"] {
+    background: #87C893;
+    color: #FFFFFF;
+}
+
+#lost:checked ~ .status-tabs .status-tab[for="lost"] {
     background: #FF7B7B;
     color: #FFFFFF;
 }
 
 
-#status-switcher:checked ~ .content .found-placeholder {
-    display: none;
-}
-
-#status-switcher:checked ~ .content .lost-placeholder {
-    display: block;
-}
-
-
-#status-switcher:checked ~ .content .found-upload {
-    display: none;
-}
-
-#status-switcher:checked ~ .content .lost-upload {
+.photo-upload-area {
     display: flex;
+    gap: 16px;
 }
 
-
-#status-switcher:checked ~ .content .found-submit {
-    display: none;
+.add-photo {
+    width: 120px;
+    height: 120px;
+    border: 2px dashed #D9D9D9;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    background: #FFFFFF;
 }
 
-#status-switcher:checked ~ .content .lost-submit {
-    display: block;
+.add-photo:hover {
+    border-color: #8BC4E8;
+    background: #F0F9FF;
 }
 
+.add-photo img {
+    width: 24px;
+    height: 24px;
+}
+
+.add-photo p {
+    font-size: 14px;
+    color: #73706D;
+}
 
 #status-switcher:checked ~ .content .danger-zone {
     display: block;
