@@ -4,6 +4,7 @@ from app import app, db
 from app.models import Pet
 import os
 from werkzeug.utils import secure_filename
+from app.models import User
 
 UPLOAD_FOLDER = os.path.join(app.root_path, 'static', 'uploads')
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'webp'}
@@ -222,3 +223,53 @@ def get_user_pets(user_id):
             'success': False,
             'error': str(e)
         }), 500
+
+@app.route("/api/user/update", methods=['PUT'])
+@login_required
+def update_user():
+    try:
+        data = request.form
+        user = User.query.get(int(current_user.get_id()))
+
+        if data.get('name'):
+            user.name = data.get('name')
+
+        if data.get('email'):
+            user.email = data.get('email')
+
+        db.session.commit()
+
+        return jsonify({'success': True}), 200
+
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({
+            'success': False,
+            'error': str(e)
+        }), 500
+
+@app.route("/api/user/password", methods=['PUT'])
+@login_required
+def update_password():
+    if not current_user.is_authenticated:
+        return jsonify({'success': False, 'error': 'Не авторизований'}), 401
+    try:
+        data = request.form
+        user = User.query.get(int(current_user.get_id()))
+
+        old_psw = data.get('old_password')
+        new_psw = data.get('new_password')
+
+        if not user.check_password(old_psw):
+            return jsonify({'success': False, 'error': 'Невірний старий пароль'}), 400
+
+        if len(new_psw) <= 4:
+            return jsonify({'success': False, 'error': 'Пароль занадто короткий'}), 400
+
+        user.set_password(new_psw)
+        db.session.commit()
+        return jsonify({'success': True})
+
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'success': False, 'error': str(e)}), 500
