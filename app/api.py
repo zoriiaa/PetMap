@@ -49,38 +49,45 @@ def get_pets():
 @app.route("/api/pets", methods=['POST'])
 @login_required
 def add_pet():
-    """API для додавання нової тварини на карту"""
     try:
-        data = request.get_json()
+        # беремо дані з форми
+        name = request.form.get('name')
+        species = request.form.get('species')
+        breed = request.form.get('breed')
+        description = request.form.get('description')
+        status = request.form.get('status', 'lost')
+        lat = request.form.get('lat')
+        lng = request.form.get('lng')
 
-        if not data.get('lat') or not data.get('lng'):
+        if not lat or not lng:
             return jsonify({
                 'success': False,
                 'error': 'Координати обов\'язкові'
             }), 400
 
-        if not data.get('species'):
+        if not species:
             return jsonify({
                 'success': False,
                 'error': 'Вид тварини обов\'язковий'
             }), 400
 
+        # фото
         photo_name = None
-        if 'photo' in request.files:
-            photo_name = save_photo(request.files['photo'])
+        photo = request.files.get('photo')
+        if photo:
+            photo_name = save_photo(photo)
 
-        # Створення тварини
         pet = Pet(
-            name=data.get('name'),
-            species=data.get('species'),
-            breed=data.get('breed'),
-            description=data.get('description'),
-            lat=float(data['lat']),
-            lng=float(data['lng']),
+            name=name,
+            species=species,
+            breed=breed,
+            description=description,
+            lat=float(lat),
+            lng=float(lng),
             photo_name=photo_name,
-            status=data.get('status', 'lost'),
+            status=status,
             process_status='active',
-            user_id=current_user.get_id()
+            user_id=int(current_user.get_id())
         )
 
         db.session.add(pet)
@@ -92,18 +99,13 @@ def add_pet():
             'pet': pet.to_dict()
         }), 201
 
-    except ValueError as e:
-        db.session.rollback()
-        return jsonify({
-            'success': False,
-            'error': 'Невірний формат координат'
-        }), 400
     except Exception as e:
         db.session.rollback()
         return jsonify({
             'success': False,
             'error': str(e)
         }), 500
+
 
 
 # GET /api/pets/<id> - отримання конкретної тварини
@@ -132,63 +134,41 @@ def get_pet(pet_id):
 @app.route("/api/pets/<int:pet_id>", methods=['PUT'])
 @login_required
 def update_pet(pet_id):
-    """API для оновлення інформації про тварину"""
     try:
         pet = Pet.query.get(pet_id)
 
         if not pet:
-            return jsonify({
-                'success': False,
-                'error': 'Тварину не знайдено'
-            }), 404
+            return jsonify({'success': False, 'error': 'Тварину не знайдено'}), 404
 
-        # Перевірка чи користувач є власником
         if pet.user_id != int(current_user.get_id()):
-            return jsonify({
-                'success': False,
-                'error': 'Ви не маєте права редагувати цю тварину'
-            }), 403
+            return jsonify({'success': False, 'error': 'Немає доступу'}), 403
 
-        data = request.get_json()
+        data = request.form
 
-        # Оновлення полів
-        if 'name' in data:
-            pet.name = data['name']
-        if 'species' in data:
-            pet.species = data['species']
-        if 'breed' in data:
-            pet.breed = data['breed']
-        if 'description' in data:
-            pet.description = data['description']
-        if 'status' in data:
-            pet.status = data['status']
-        if 'process_status' in data:
-            pet.process_status = data['process_status']
-        if 'lat' in data:
-            pet.lat = float(data['lat'])
-        if 'lng' in data:
-            pet.lng = float(data['lng'])
+        pet.name = data.get('name')
+        pet.species = data.get('species')
+        pet.breed = data.get('breed')
+        pet.description = data.get('description')
+        pet.status = data.get('status')
 
-            # Оновлення фото якщо передали нове
-        if 'photo' in request.files and request.files['photo'].filename != '':
-            new_photo = save_photo(request.files['photo'])
+        if data.get('lat'):
+            pet.lat = float(data.get('lat'))
+        if data.get('lng'):
+            pet.lng = float(data.get('lng'))
+
+        photo = request.files.get('photo')
+        if photo and photo.filename != '':
+            new_photo = save_photo(photo)
             if new_photo:
                 pet.photo_name = new_photo
 
         db.session.commit()
 
-        return jsonify({
-            'success': True,
-            'message': 'Інформацію оновлено',
-            'pet': pet.to_dict()
-        }), 200
+        return jsonify({'success': True}), 200
 
     except Exception as e:
         db.session.rollback()
-        return jsonify({
-            'success': False,
-            'error': str(e)
-        }), 500
+        return jsonify({'success': False, 'error': str(e)}), 500
 
 
 # DELETE /api/pets/<id> - видалення тварини
