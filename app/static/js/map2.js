@@ -37,18 +37,17 @@ map.on("click", e => {
    addPetMarker = L.marker(selectedPoint, { icon: addPetIcon })
     .addTo(map)
     .on("click", function() {
-        const { lat, lng } = this.getLatLng()
+        const { lat, lng } = this.getLatLng();
         const latFixed = lat.toFixed(6);
-        const lngFixed = lng.toFixed(6)
-        
-        const url = `/pet_form?lat=${encodeURIComponent(latFixed)}&lng=${encodeURIComponent(lngFixed)}`;
+        const lngFixed = lng.toFixed(6);
 
-          console.log("Redirecting to:", url); // перевірка в консолі
+        window.location.href = `/pet/add?lat=${encodeURIComponent(latFixed)}&lng=${encodeURIComponent(lngFixed)}`;
+    });
 
-        window.location.href = url;
     });
 
 });
+
 
 
 
