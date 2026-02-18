@@ -39,8 +39,10 @@ map.on("click", e => {
         .on("click", () => {
             const lat = selectedPoint.lat;
             const lng = selectedPoint.lng;
-            window.location.href = `/pet_form?lat=${lat}&lng=${lng}`;
+            window.location.href = `/pet_form?lat=${encodeURIComponent(latFixed)}&lng=${encodeURIComponent(lngFixed)}`;
+
         });
 });
+
 
 
