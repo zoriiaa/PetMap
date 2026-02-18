@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>PetMap - Додати тварину</title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/pet_form.css') }}">
+        <link rel="stylesheet" href="pet_form.css">
     </head>
     <body>
         <div class="header">
@@ -65,15 +65,14 @@
                     <label>Статус <span class="required">*</span></label>
                     <select id="status">
                         <option>Тимчасово забрали до себе</option>
-                        <option>Знайдена</option>
-                        <option>Загублена</option>
+                        <option>Веземо в притулок</option>
+                        <option>Веземо в клініку</option>
                     </select>
                 </div>
             </div>
         
             <div class="form-group full-width">
                 <label>Опис <span class="required">*</span></label>
-                <textarea id="description" class="found-placeholder" placeholder="Детальний опис зовнішнього вигляду, особливих прикмет..."></textarea>
                 <textarea id="description" class="lost-placeholder" placeholder="Детальний опис зовнішності тварини, особливі прикмети"></textarea>
             </div>
         
@@ -88,9 +87,7 @@
                 </div>
                 
                 <div class="photo-upload-area lost-upload">
-                    <div class="uploaded-photo">
-                        <img src="static/img/image8.png" alt="Рудi" class="animal-photo">
-                    </div>
+                    
                     <div class="photo-upload add-photo">
                         <img src="static/img/plus.svg" alt="plus icon">
                         <p>Додати фото</p>
@@ -121,57 +118,8 @@
             <img src="static/img/logo.svg" alt="PetMap Logo" class="logo-icon">
             <span>Pet<span class="map-text">Map</span></span>
         </div>
+        <script src="static/js/add.js"></script>
 
-        <script>
-            const foundRadio = document.getElementById('found');
-            const lostRadio = document.getElementById('lost');
-            const tabFound = document.querySelector('label[for="found"]');
-            const tabLost = document.querySelector('label[for="lost"]');
-        
-            function switchToFound() {
-                tabFound.style.background = '#87C893';
-                tabFound.style.color = '#FFFFFF';
-                tabLost.style.background = '#FFFFFFCC';
-                tabLost.style.color = '#73706D';
-        
-                document.querySelector('.found-placeholder').style.display = 'block';
-                document.querySelector('.lost-placeholder').style.display = 'none';
-        
-                document.querySelector('.found-upload').style.display = 'block';
-                document.querySelector('.lost-upload').style.display = 'none';
-        
-                document.querySelector('.found-submit').style.display = 'block';
-                document.querySelector('.lost-submit').style.display = 'none';
-        
-                document.querySelector('.danger-zone').style.display = 'none';
-            }
-        
-            function switchToLost() {
-                tabLost.style.background = '#FF7B7B';
-                tabLost.style.color = '#FFFFFF';
-                tabFound.style.background = '#FFFFFFCC';
-                tabFound.style.color = '#73706D';
-        
-               
-                document.querySelector('.found-placeholder').style.display = 'none';
-                document.querySelector('.lost-placeholder').style.display = 'block';
-        
-                
-                document.querySelector('.found-upload').style.display = 'none';
-                document.querySelector('.lost-upload').style.display = 'flex';
-        
-                
-                document.querySelector('.found-submit').style.display = 'none';
-                document.querySelector('.lost-submit').style.display = 'block';
-        
-                
-                document.querySelector('.danger-zone').style.display = 'block';
-            }
-        
-            tabFound.addEventListener('click', switchToFound);
-            tabLost.addEventListener('click', switchToLost);
-        
-            switchToFound();
-        </script>
+       
     </body>
 </html>
