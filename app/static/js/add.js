@@ -8,6 +8,25 @@ const breedInput = document.getElementById("breed");
 const statusInput = document.getElementById("status");
 const descriptionInput = document.getElementById("description");
 const photoInput = document.getElementById("photo-input");
+const preview = document.querySelector(".animal-photo");
+
+const uploadBlock = document.querySelector(".found-upload");
+if (uploadBlock && photoInput) {
+    uploadBlock.addEventListener("click", () => {
+        photoInput.click();
+    });
+}
+
+if (photoInput && preview) {
+    photoInput.addEventListener("change", () => {
+        const file = photoInput.files[0];
+        if (file) {
+            preview.src = URL.createObjectURL(file);
+            preview.style.display = "block";
+        }
+    });
+}
+
 
 const form = document.querySelector(".animal-form");
 const submitBtn = document.querySelector(".btn-submit");
@@ -124,3 +143,4 @@ deleteBtn.addEventListener("click", async () => {
         alert("Помилка видалення");
     }
 });
+
