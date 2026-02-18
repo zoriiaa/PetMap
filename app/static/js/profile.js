@@ -52,5 +52,6 @@ async function loadUserPets() {
 }
 
 function editPet(id) {
-    window.location.href = `/pet_form/${id}`;
+    window.location.href = `/pet/edit/${id}`;
 }
+
