@@ -1,9 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    const urlParams = new URLSearchParams(window.location.search);
-    const lat = urlParams.get("lat");
-    const lng = urlParams.get("lng");
-    const petId = urlParams.get("id");
+    const params = new URLSearchParams(window.location.search);
+    const lat = params.get("lat");
+    const lng = params.get("lng");
+    const petId = params.get("id");
 
     const isEdit = !!petId;
 
@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const lostRadio = document.getElementById("lost");
 
 
-    function updateDescriptionPlaceholder() {
+    function updatePlaceholder() {
         if (foundRadio.checked) {
             descriptionInput.placeholder =
                 "Опишіть де і за яких обставин ви знайшли тварину";
@@ -38,28 +38,31 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    foundRadio.addEventListener("change", updateDescriptionPlaceholder);
-    lostRadio.addEventListener("change", updateDescriptionPlaceholder);
-    updateDescriptionPlaceholder();
+    foundRadio.addEventListener("change", updatePlaceholder);
+    lostRadio.addEventListener("change", updatePlaceholder);
+    updatePlaceholder();
 
 
-    uploadArea.addEventListener("click", () => {
-        photoInput.click();
-    });
+    if (uploadArea && photoInput) {
+        uploadArea.addEventListener("click", () => {
+            photoInput.click();
+        });
+    }
 
-    photoInput.addEventListener("change", () => {
-        const file = photoInput.files[0];
-        if (file) {
-            photoPreview.src = URL.createObjectURL(file);
-            photoPreview.style.display = "block";
-        }
-    });
+    if (photoInput && photoPreview) {
+        photoInput.addEventListener("change", () => {
+            const file = photoInput.files[0];
+            if (file) {
+                photoPreview.src = URL.createObjectURL(file);
+                photoPreview.style.display = "block";
+            }
+        });
+    }
 
 
     if (isEdit) {
         btnSubmit.textContent = "Зберегти";
         dangerZone.style.display = "block";
-
         loadPet();
     }
 
@@ -68,6 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const res = await fetch(`/api/pets/${petId}`, {
                 credentials: "include"
             });
+
             const pet = await res.json();
 
             nameInput.value = pet.name || "";
@@ -77,99 +81,111 @@ document.addEventListener("DOMContentLoaded", () => {
             descriptionInput.value = pet.description || "";
             dateInput.value = pet.date || "";
 
+            if (pet.type === "lost") {
+                lostRadio.checked = true;
+            } else {
+                foundRadio.checked = true;
+            }
+
+            updatePlaceholder();
+
             if (pet.photo_name) {
                 photoPreview.src = `/static/uploads/${pet.photo_name}`;
                 photoPreview.style.display = "block";
             }
 
         } catch (err) {
-            alert("Не вдалося завантажити тварину");
+            alert("Не вдалося завантажити дані");
             console.error(err);
         }
     }
 
 
+    if (form) {
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
 
-    form.addEventListener("submit", async (e) => {
-        e.preventDefault();
-
-        if (!lat || !lng) {
-            alert("Координати не передані");
-            return;
-        }
-
-        const formData = new FormData();
-        formData.append("name", nameInput.value);
-        formData.append("species", speciesInput.value);
-        formData.append("breed", breedInput.value);
-        formData.append("status", statusInput.value);
-        formData.append("description", descriptionInput.value);
-        formData.append("date", dateInput.value);
-        formData.append("lat", lat);
-        formData.append("lng", lng);
-        formData.append("type", foundRadio.checked ? "found" : "lost");
-
-        if (photoInput.files[0]) {
-            formData.append("photo", photoInput.files[0]);
-        }
-
-        let url = "/api/pets";
-        let method = "POST";
-
-        if (isEdit) {
-            url = `/api/pets/${petId}`;
-            method = "PUT";
-        }
-
-        try {
-            const res = await fetch(url, {
-                method,
-                body: formData,
-                credentials: "include"
-            });
-
-            const result = await res.json();
-
-            if (result.success) {
-                window.location.href = "/profile";
-            } else {
-                alert(result.error || "Помилка");
+            if (!lat || !lng) {
+                alert("Координати не передані з карти");
+                return;
             }
 
-        } catch (err) {
-            alert("Помилка сервера");
-            console.error(err);
-        }
-    });
+            const formData = new FormData();
 
+            formData.append("name", nameInput.value);
+            formData.append("species", speciesInput.value);
+            formData.append("breed", breedInput.value);
+            formData.append("status", statusInput.value);
+            formData.append("description", descriptionInput.value);
+            formData.append("date", dateInput.value);
+            formData.append("lat", lat);
+            formData.append("lng", lng);
+            formData.append("type", foundRadio.checked ? "found" : "lost");
 
-
-    btnDelete.addEventListener("click", async () => {
-
-        if (!confirm("Ви впевнені?")) return;
-
-        try {
-            const res = await fetch(`/api/pets/${petId}`, {
-                method: "DELETE",
-                credentials: "include"
-            });
-
-            const result = await res.json();
-
-            if (result.success) {
-                window.location.href = "/profile";
-            } else {
-                alert(result.error || "Помилка");
+            if (photoInput.files[0]) {
+                formData.append("photo", photoInput.files[0]);
             }
 
-        } catch (err) {
-            alert("Помилка видалення");
-        }
-    });
+            let url = "/api/pets";
+            let method = "POST";
+
+            if (isEdit) {
+                url = `/api/pets/${petId}`;
+                method = "PUT";
+            }
+
+            try {
+                const res = await fetch(url, {
+                    method: method,
+                    body: formData,
+                    credentials: "include"
+                });
+
+                const result = await res.json();
+
+                if (result.success) {
+                    window.location.href = "/profile";
+                } else {
+                    alert(result.error || "Помилка збереження");
+                }
+
+            } catch (err) {
+                console.error(err);
+                alert("Помилка сервера");
+            }
+        });
+    }
 
 
-    btnCancel.addEventListener("click", () => {
-        window.location.href = "/profile";
-    });
+    if (btnDelete) {
+        btnDelete.addEventListener("click", async () => {
+
+            if (!confirm("Ви впевнені, що хочете видалити?")) return;
+
+            try {
+                const res = await fetch(`/api/pets/${petId}`, {
+                    method: "DELETE",
+                    credentials: "include"
+                });
+
+                const result = await res.json();
+
+                if (result.success) {
+                    window.location.href = "/profile";
+                } else {
+                    alert(result.error || "Помилка видалення");
+                }
+
+            } catch (err) {
+                alert("Помилка сервера");
+            }
+        });
+    }
+
+    if (btnCancel) {
+        btnCancel.addEventListener("click", () => {
+            window.location.href = "/profile";
+        });
+    }
 
 });
