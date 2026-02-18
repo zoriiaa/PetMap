@@ -34,15 +34,20 @@ map.on("click", e => {
         map.removeLayer(addPetMarker);
     }
 
-    addPetMarker = L.marker(selectedPoint, { icon: addPetIcon })
-        .addTo(map)
-        .on("click", () => {
-            const lat = selectedPoint.lat;
-            const lng = selectedPoint.lng;
-            window.location.href = `/pet_form?lat=${encodeURIComponent(latFixed)}&lng=${encodeURIComponent(lngFixed)}`;
+   addPetMarker = L.marker(selectedPoint, { icon: addPetIcon })
+    .addTo(map)
+    .on("click", function() {
+        const { lat, lng } = this.getLatLng()
+        const latFixed = lat.toFixed(6);
+        const lngFixed = lng.toFixed(6)
+        
+        const url = `/pet_form?lat=${encodeURIComponent(latFixed)}&lng=${encodeURIComponent(lngFixed)}`;
 
-        });
+        window.location.href = url;
+    });
+
 });
+
 
 
 
