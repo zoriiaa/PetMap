@@ -118,8 +118,6 @@ document.addEventListener("DOMContentLoaded", () => {
             formData.append("status", statusInput.value);
             formData.append("description", descriptionInput.value);
             formData.append("date", dateInput.value);
-            formData.append("lat", lat);
-            formData.append("lng", lng);
             formData.append("type", foundRadio.checked ? "found" : "lost");
 
             if (photoInput.files[0]) {
@@ -194,4 +192,5 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 });
+
 
