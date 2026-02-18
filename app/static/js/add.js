@@ -105,7 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
         form.addEventListener("submit", async (e) => {
             e.preventDefault();
 
-            if (!lat || !lng) {
+            if (!isEdit && (!lat || !lng)) {
                 alert("Координати не передані з карти");
                 return;
             }
@@ -126,6 +126,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 formData.append("photo", photoInput.files[0]);
             }
 
+            if (!isEdit) {
+                formData.append("lat", lat);
+                formData.append("lng", lng);
+            }
+            
             let url = "/api/pets";
             let method = "POST";
 
@@ -189,3 +194,4 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 });
+
