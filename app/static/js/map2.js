@@ -44,9 +44,9 @@ map.on("click", e => {
         window.location.href = `/pet/add?lat=${encodeURIComponent(latFixed)}&lng=${encodeURIComponent(lngFixed)}`;
     });
 
-    });
 
 });
+
 
 
 
