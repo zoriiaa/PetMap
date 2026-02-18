@@ -13,15 +13,15 @@
                 <span>Pet<span class="map-text">Map</span></span>
             </div>
             <nav class="menu">
-                <a href="#" class="menu-item">
+                <a href="/" class="menu-item">
                     <img src="static/img/House2.svg" alt="House logo">
                     <span>Головна</span>
                 </a>
-                <a href="#" class="menu-item active">
+                <a href="/map" class="menu-item active">
                     <img src="static/img/Label2.svg" alt="Label logo">
                     <span>Карта</span>
                 </a>
-                <a href="#" class="menu-item">
+                <a href="/profile" class="menu-item">
                     <img src="static/img/User.svg" alt="user logo">
                     <span>Профіль</span>
                 </a>
@@ -40,13 +40,6 @@
          Повернутись в режим перегляду
         </button>
 
-        <button class="photo-btn" onclick="window.location.href='{{ url_for('pet_form') }}'">
-            <div class="icon-group">
-                <img src="static/img/Vector.svg" alt="Позначка">
-                <img src="static/img/Plus circle.svg" alt="Плюс">
-            </div>
-            <span>Додати тварину</span>
-        </button>
 
         
         <div class="footer">
@@ -58,4 +51,5 @@
 
     </body>
 </html>
+
 

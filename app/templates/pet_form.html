@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>PetMap - Додати тварину</title>
-        <link rel="stylesheet" href="static/css/pet_form.css">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/pet_form.css') }}">
     </head>
     <body>
         <div class="header">
@@ -31,8 +31,8 @@
         <input type="checkbox" id="status-switcher" hidden>
         
         <div class="status-tabs">
-            <label for="status-switcher" class="status-tab status-found">Знайдена</label>
-            <label for="status-switcher" class="status-tab status-lost">Загублена</label>
+            <label for="status-switcher" class="status-tab status-found id="tab-found">Знайдена</label>
+            <label for="status-switcher" class="status-tab status-lost id="tab-lost">Загублена</label>
         </div>
 
         <div class="content">
