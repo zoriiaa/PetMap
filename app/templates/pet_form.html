@@ -30,13 +30,14 @@
 
 
         <div class="content">
-            <div class="form-card">
-        <form class="animal-form" enctype="multipart/form-data">
+    <div class="form-card">
+
+        <form id="pet-form" enctype="multipart/form-data">
 
             <div class="status-tabs">
-                <input type="radio" name="status-switcher" id="found" hidden>
-                <input type="radio" name="status-switcher" id="lost" hidden>
-        
+                <input type="radio" name="statusType" id="found" value="found" checked hidden>
+                <input type="radio" name="statusType" id="lost" value="lost" hidden>
+
                 <label for="found" class="status-tab">Знайдена</label>
                 <label for="lost" class="status-tab">Загублена</label>
             </div>
@@ -44,81 +45,77 @@
             <div class="form-row">
                 <div class="form-group">
                     <label>Кличка</label>
-                    <input type="text" id="name" placeholder="Наприклад: Рудi">
+                    <input type="text" id="name">
                 </div>
+
                 <div class="form-group">
-                    <label>Вид <span class="required">*</span></label>
-                    <select id="species">
-                        <option>Собака</option>
-                        <option>Кіт</option>
-                        <option>Інше</option>
+                    <label>Вид *</label>
+                    <select id="species" required>
+                        <option value="Собака">Собака</option>
+                        <option value="Кіт">Кіт</option>
+                        <option value="Інше">Інше</option>
                     </select>
                 </div>
             </div>
-        
+
             <div class="form-row">
                 <div class="form-group">
                     <label>Порода</label>
-                    <input type="text" id="breed" placeholder="Наприклад: Золотистий ретривер">
+                    <input type="text" id="breed">
                 </div>
+
                 <div class="form-group">
-                    <label>Статус <span class="required">*</span></label>
-                    <select id="status">
+                    <label>Статус *</label>
+                    <select id="status" required>
                         <option>Тимчасово забрали до себе</option>
                         <option>Веземо в притулок</option>
                         <option>Веземо в клініку</option>
                     </select>
                 </div>
             </div>
-        
+
             <div class="form-group full-width">
-                <label>Опис <span class="required">*</span></label>
-                <textarea id="description" class="lost-placeholder" placeholder="Детальний опис зовнішності тварини, особливі прикмети"></textarea>
+                <label>Опис *</label>
+                <textarea id="description" required></textarea>
             </div>
-        
+
             <div class="form-group full-width">
-                <label>Фото <span class="required">*</span></label>
-                
-                <div class="photo-upload found-upload">
-                    <img src="static/img/Upload.svg" alt="Upload" class="upload-icon">
-                    <p class="upload-main">Натисніть для завантаження фото</p>
-                    <p class="upload-sub">або перетягніть сюди</p>
-                    <input type="file" accept="image/*" hidden id="photo-input">
+                <label>Фото *</label>
+
+                <div class="photo-upload" id="upload-area">
+                    <p>Натисніть для завантаження фото</p>
+                    <input type="file" id="photo-input" accept="image/*" hidden>
                 </div>
-                
-                <div class="photo-upload-area lost-upload">
-                    
-                    <div class="photo-upload add-photo">
-                        <img src="static/img/plus.svg" alt="plus icon">
-                        <p>Додати фото</p>
-                    </div>
-                </div>
+
+                <img id="photo-preview" style="display:none; max-width:200px; margin-top:10px;">
             </div>
-        
+
+
             <div class="form-group full-width">
-                <label>Дата <span class="required">*</span></label>
-                <input type="date" id="date" placeholder="дд-мм-рррр">
+                <label>Дата *</label>
+                <input type="date" id="date" required>
             </div>
-        
+
             <div class="form-actions">
-                <button type="button" class="btn-cancel">Скасувати</button>
-                <button type="submit" class="btn-submit found-submit">Додати тварину на карту</button>
-                <button type="submit" class="btn-submit lost-submit">Зберегти</button>
+                <button type="button" id="btn-cancel">Скасувати</button>
+                <button type="submit" id="btn-submit">Додати на карту</button>
             </div>
-        
-            <div class="danger-zone">
-                <p class="danger-title">Небезпечна зона</p>
-                <button type="button" class="btn-delete">Видалити тварину</button>
+
+            <div class="danger-zone" id="danger-zone" style="display:none;">
+                <button type="button" id="btn-delete">Видалити тварину</button>
             </div>
+
         </form>
-        </div>
+
     </div>
+</div>
 
         <div class="footer">
             <img src="static/img/logo.svg" alt="PetMap Logo" class="logo-icon">
             <span>Pet<span class="map-text">Map</span></span>
         </div>
-        <script src="static/js/add.js"></script>
+        
+        <script src="{{ url_for('static', filename='js/add.js') }}"></script>
 
        
     </body>
