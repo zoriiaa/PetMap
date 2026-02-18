@@ -132,8 +132,60 @@ if (btnDelete) {
             alert('Помилка підключення до сервера');
         }
     });
-}
-;
+};
+
+<script>
+            const foundRadio = document.getElementById('found');
+            const lostRadio = document.getElementById('lost');
+            const tabFound = document.querySelector('label[for="found"]');
+            const tabLost = document.querySelector('label[for="lost"]');
+        
+            function switchToFound() {
+                tabFound.style.background = '#87C893';
+                tabFound.style.color = '#FFFFFF';
+                tabLost.style.background = '#FFFFFFCC';
+                tabLost.style.color = '#73706D';
+        
+                document.querySelector('.found-placeholder').style.display = 'block';
+                document.querySelector('.lost-placeholder').style.display = 'none';
+        
+                document.querySelector('.found-upload').style.display = 'block';
+                document.querySelector('.lost-upload').style.display = 'none';
+        
+                document.querySelector('.found-submit').style.display = 'block';
+                document.querySelector('.lost-submit').style.display = 'none';
+        
+                document.querySelector('.danger-zone').style.display = 'none';
+            }
+        
+            function switchToLost() {
+                tabLost.style.background = '#FF7B7B';
+                tabLost.style.color = '#FFFFFF';
+                tabFound.style.background = '#FFFFFFCC';
+                tabFound.style.color = '#73706D';
+        
+               
+                document.querySelector('.found-placeholder').style.display = 'none';
+                document.querySelector('.lost-placeholder').style.display = 'block';
+        
+                
+                document.querySelector('.found-upload').style.display = 'none';
+                document.querySelector('.lost-upload').style.display = 'flex';
+        
+                
+                document.querySelector('.found-submit').style.display = 'none';
+                document.querySelector('.lost-submit').style.display = 'block';
+        
+                
+                document.querySelector('.danger-zone').style.display = 'block';
+            }
+        
+            tabFound.addEventListener('click', switchToFound);
+            tabLost.addEventListener('click', switchToLost);
+        
+            switchToFound();
+        </script>
+
 
 
 
