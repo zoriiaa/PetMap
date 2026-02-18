@@ -43,10 +43,13 @@ map.on("click", e => {
         
         const url = `/pet_form?lat=${encodeURIComponent(latFixed)}&lng=${encodeURIComponent(lngFixed)}`;
 
+          console.log("Redirecting to:", url); // перевірка в консолі
+
         window.location.href = url;
     });
 
 });
+
 
 
 
