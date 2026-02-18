@@ -176,6 +176,12 @@ input[type="date"] {
     color: #B3B3B3;
 }
 
+input[type="text"]:not(:placeholder-shown),
+input[type="date"]:not(:placeholder-shown),
+textarea:not(:placeholder-shown) {
+    color: #131B2B;
+}
+
 select {
     color: #131B2B;
     appearance: none;
