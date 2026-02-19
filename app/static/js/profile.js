@@ -8,6 +8,12 @@ document.addEventListener("DOMContentLoaded", () => {
     loadUserPets(userId);
 });
 
+if (!userId) {
+    console.error("USER ID missing");
+    return;
+}
+
+
 async function loadUserPets(userId) {
     try {
         const res = await fetch(`/api/pets/user/${userId}`);
@@ -61,6 +67,7 @@ async function loadUserPets(userId) {
         console.error("Помилка:", error);
     }
 }
+
 
 
 
