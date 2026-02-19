@@ -56,7 +56,7 @@
                 </div>
 
 
-                <div id="petsContainer" data-user-id="{{ current_user.id }}"></div>
+                <div id="petsContainer" data-user-id="{{ current_user.get_id() }}""></div>
                 
         <div class="footer">
             <img src="static/img/logo.svg" alt="PetMap Logo" class="logo-icon">
@@ -71,6 +71,7 @@
     </body>
 
 </html>
+
 
 
 
