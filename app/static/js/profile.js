@@ -1,16 +1,16 @@
+const container = document.getElementById("petsContainer");
+const userId = container.dataset.userId;
+
 loadUserPets();
 
 async function loadUserPets() {
-
     try {
         const res = await fetch(`/api/pets/user/${userId}`);
         const pets = await res.json();
 
-        const container = document.getElementById("petsContainer");
         container.innerHTML = "";
 
         pets.forEach(pet => {
-
             const card = document.createElement("div");
             card.className = "pet-card";
 
@@ -35,6 +35,7 @@ async function loadUserPets() {
                         </p>
                     </div>
                 </div>
+
                 <div class="pet-right">
                     <button onclick="window.location.href='/pet_form?id=${pet.id}'">
                         Редагувати
@@ -43,7 +44,6 @@ async function loadUserPets() {
             `;
 
             container.appendChild(card);
-
         });
 
     } catch (error) {
@@ -54,4 +54,3 @@ async function loadUserPets() {
 function editPet(id) {
     window.location.href = `/pet/edit/${id}`;
 }
-
