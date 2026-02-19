@@ -1,13 +1,22 @@
-const container = document.getElementById("petsContainer");
-const userId = container.dataset.userId; 
+document.addEventListener("DOMContentLoaded", () => {
+    const container = document.getElementById("petsContainer");
+    if (!container) return;
 
-loadUserPets();
+    const userId = container.dataset.userId;
+    console.log("USER ID:", userId);
 
-async function loadUserPets() {
+    loadUserPets(userId);
+});
+
+async function loadUserPets(userId) {
     try {
         const res = await fetch(`/api/pets/user/${userId}`);
+
+        if (!res.ok) throw new Error("HTTP " + res.status);
+
         const pets = await res.json();
 
+        const container = document.getElementById("petsContainer");
         container.innerHTML = "";
 
         pets.forEach(pet => {
@@ -53,6 +62,6 @@ async function loadUserPets() {
     }
 }
 
-function editPet(id) {
-    window.location.href = `/pet/edit/${id}`;
-}
+
+
+
