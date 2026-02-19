@@ -56,55 +56,24 @@
                 </div>
 
 
-                <div id="petsContainer"></div>
+                <div id="petsContainer" data-user-id="{{ current_user.id }}"></div>
                 
         
-                    <div class="animals-list">
-                    {% for pet in pets %}
-                    <div class="animal-card">
-                        <img src="{{ 'static/uploads/' + pet.photo_name if pet.photo_name else 'static/img/no-photo.svg' }}" alt="{{ pet.name }}" class="animal-photo">
-                        <div class="animal-info">
-                            <div class="animal-header">
-                                <h3>{{ pet.name or 'Без імені' }}</h3>
-                                {% if pet.status == 'lost' %}
-                                    <span class="status-badge status-saved">Загублена</span>
-                                {% else %}
-                                    <span class="status-badge status-found">Знайдена</span>
-                                {% endif %}
-                                {% if pet.process_status != 'active' %}
-                                    <span class="status-badge status-looking">{{ pet.process_status }}</span>
-                                {% endif %}
-                            </div>
-                            <p class="animal-type">{{ pet.species }}</p>
-                            <p class="animal-desc">{{ pet.description }}</p>
-                            <p class="animal-date">Додано: <span>{{ pet.date }}</span></p>
-                        </div>
-                        <div class="animal-actions">
-                            <button class="btn-edit" onclick="window.location.href='/pet/edit?id={{ pet.id }}'">Редагувати</button>
-                            <button class="btn-view">Переглянути</button>
-                        </div>
-                    </div>
-                    {% else %}
-                    <p class="no-animals">Ви ще не додали жодної тварини</p>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
+  
         
         <div class="footer">
             <img src="static/img/logo.svg" alt="PetMap Logo" class="logo-icon">
             <span>Pet<span class="map-text">Map</span></span>
         </div>
         
-    <script>
-        const userId = {{ user_id }};
-    </script>
+
     <script src="/static/js/profile.js"></script>
     <script src="/static/js/add.js"></script>    
         
     </body>
 
 </html>
+
 
 
 
