@@ -56,7 +56,7 @@ async function loadUserPets(userId) {
                 </div>
 
                 <div class="pet-right">
-                    <button onclick="window.location.href='/pet_form?id=${pet.id}'">
+                    <button onclick="window.location.href='/pet/edit?id=${pet.id}'">
                         Редагувати
                     </button>
                 </div>
@@ -69,6 +69,7 @@ async function loadUserPets(userId) {
         console.error("Помилка:", error);
     }
 }
+
 
 
 
