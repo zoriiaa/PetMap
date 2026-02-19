@@ -12,8 +12,6 @@ body {
     min-height: 100vh;
 }
 
-
-
 .header {
     background: white;
     padding: 20px 60px;
@@ -82,8 +80,6 @@ body {
     flex-direction: column;
     align-items: center;
 }
-
-
 
 .profile-block {
     display: flex;
@@ -154,8 +150,6 @@ body {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
-
-
 .tabs {
     display: flex;
     gap: 70px;
@@ -199,13 +193,12 @@ body {
 }
 
 
-
 .petsContainer {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    background: #F3F4F6;
-    border-radius: 40px ;
+    width: 100%;
+    max-width: 1300px;
 }
 
 .pet-card {
@@ -231,6 +224,7 @@ body {
 .pet-middle {
     flex: 1;
     margin-left: 15px;
+    display: flex;
     flex-direction: column;
 }
 
@@ -297,165 +291,6 @@ body {
     font-weight: bold;
     font-size: 20px;
 }
-
-.animal-card {
-    display: flex;
-    gap: 20px;
-    padding: 20px;
-    border-radius: 12px;
-    align-items: center;
-    background-color: #FFFFFF;
-    height: 206px;
-    box-shadow: 0 4px 10px rgba(114, 136, 150, 0.4);
-
-}
-
-.animal-photo {
-    width: 168px;
-    height: 168px;
-    border-radius: 12px;
-    object-fit: cover;
-}
-
-.animal-info {
-    flex: 1;
-}
-
-.animal-header {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    margin-bottom: 5px;
-}
-
-.animal-header h3 {
-    font-size: 20px;
-    font-weight: 700;
-    color: #000000;
-    line-height: 26px;
-}
-
-.status-badge {
-    padding: 4px 12px;
-    border-radius: 12px;
-    font-size: 12px;
-    font-weight: 600;
-}
-
-.status-saved {
-    background: #FF7B7B;
-    color: #FFFFFF;
-    width: 103px;
-    height: 26px;
-    border-radius: 13px;
-    font-weight: 700;
-    font-family: 'Nunito';
-    font-size: 16px;
-    padding-top: 2px;
-}
-
-.status-found {
-    background: #87C893;
-    color: #FFFFFF;
-    width: 103px;
-    height: 26px;
-    border-radius: 13px;
-    font-weight: 700;
-    font-family: 'Nunito';
-    font-size: 16px;
-    padding-top: 2px;
-}
-
-.status-looking {
-    background: #8BC4E8;
-    color: #FFFFFF;
-    width: 242px;
-    height: 26px;
-    border-radius: 13px;
-    font-weight: 700;
-    font-family: 'Nunito';
-    font-size: 16px;
-    padding-top: 2px;
-}
-
-.status-help {
-    background: #8BC4E8;
-    color: #FFFFFF;
-    width: 183px;
-    height: 26px;
-    border-radius: 13px;
-    font-weight: 700;
-    font-family: 'Nunito';
-    font-size: 16px;
-    padding-top: 2px;
-    text-align: center;
-}
-
-.animal-type {
-    font-size: 18px;
-    color: #73706D;
-    margin-bottom: 8px;
-    font-weight: 700;
-}
-
-.animal-desc {
-    font-size: 18px;
-    font-weight: 600;
-    font-family: 'Nunito';
-    color: #73706D;
-    margin-bottom: 8px;
-}
-
-.animal-date {
-    font-size: 16px;
-    color: #131B2B;
-    font-weight: 700;
-}
-
-.animal-date span {
-    color: #73706D;
-    font-size: 15px;
-    font-weight: 700; 
-}
-
-
-
-.animal-actions {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-}
-
-.btn-edit {
-    background: #FFC973;
-    color: #131B2B;
-    border: none;
-    border-radius: 13px;
-    padding: 10px 20px;
-    font-size: 20px;
-    font-weight: 700;
-    font-family: 'Nunito';
-    cursor: pointer;
-    min-width: 130px;
-    width: 169px;
-    height: 45px;
-}
-
-.btn-view {
-    background: white;
-    color: #8BC4E8;
-    border: 1px solid #8BC4E8;
-    border-radius: 13px;
-    padding: 10px 20px;
-    font-size: 20px;
-    font-weight: 700;
-    font-family: 'Nunito';
-    cursor: pointer;
-    min-width: 130px;
-    width: 169px;
-    height: 45px;
-}
-
 
 
 .footer {
@@ -489,100 +324,3 @@ body {
 
 }
 
-.petsContainer {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    background: #F3F4F6;
-    border-radius: 40px ;
-}
-
-.pet-card {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #FFFFFF;
-    padding: 15px;
-    border-radius: 15px;
-}
-
-.pet-left {
-    width: 200px;
-}
-
-.pet-image {
-    width: 168px;
-    height: 168px;
-    object-fit: cover;
-    border-radius: 13px;
-}
-
-.pet-middle {
-    flex: 1;
-    margin-left: 15px;
-    flex-direction: column;
-}
-
-.pet-title {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.status {
-    padding: 3px 10px;
-    border-radius: 13px;
-    font-size: 16px;
-    color: white;
-}
-
-.status.lost {
-    background: #FF7B7B;
-}
-
-.status.found {
-    background: #87C893;
-}
-
-.species {
-    padding: 3px 10px;
-    border-radius: 16px;
-    font-size: 16px;
-    color: white;
-    background: #8BC4E8;
-}
-
-.pet-info {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: flex-start;
-    height: 150px;
-}
-
-.bread {
-    color: #73706D;
-    font-size: 18px;
-    font-weight: bold;
-}
-
-.description {
-    color: #73706D;
-    font-size: 18px;
-}
-
-.pet-right {
-    display: flex;
-    align-items: center;
-}
-
-.pet-right button {
-    background: #FFD182;
-    border: none;
-    padding: 6px 10px;
-    margin-right: 20px;
-    border-radius: 13px;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 20px;
-}
