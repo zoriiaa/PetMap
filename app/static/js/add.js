@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const lostRadio = document.getElementById("lost");
 
     let existingPhotos = []; 
-    let newFiles = [];     
+    let newFiles = [];       
 
     function updatePlaceholder() {
         if (foundRadio.checked) {
@@ -62,9 +62,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const img = document.createElement("img");
         img.src = isExisting ? `/static/uploads/${file}` : URL.createObjectURL(file);
+        img.classList.add("preview-img");
 
         const btnRemove = document.createElement("button");
         btnRemove.textContent = "×";
+        btnRemove.classList.add("remove-photo-btn");
 
         btnRemove.addEventListener("click", () => {
             wrapper.remove();
@@ -122,7 +124,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             const formData = new FormData();
-
             formData.append("name", nameInput.value);
             formData.append("species", speciesInput.value);
             formData.append("breed", breedInput.value);

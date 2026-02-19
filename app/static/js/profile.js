@@ -1,5 +1,5 @@
 const container = document.getElementById("petsContainer");
-const userId = container.dataset.userId;
+const userId = container.dataset.userId; 
 
 loadUserPets();
 
@@ -14,9 +14,11 @@ async function loadUserPets() {
             const card = document.createElement("div");
             card.className = "pet-card";
 
+            const firstPhoto = pet.photos && pet.photos.length > 0 ? pet.photos[0] : "";
+
             card.innerHTML = `
                 <div class="pet-left">
-                    <img src="/static/uploads/${pet.photo_name}" class="pet-image">
+                    <img src="${firstPhoto ? `/static/uploads/${firstPhoto}` : '/static/img/default-pet.png'}" class="pet-image">
                 </div>
 
                 <div class="pet-middle">
@@ -28,7 +30,7 @@ async function loadUserPets() {
                         <p class="species">${pet.species}</p>
                     </div>
                     <div class="pet-info">
-                        <p class="bread">${pet.bread}</p>
+                        <p class="bread">${pet.breed || ""}</p>
                         <p class="description">${pet.description || ""}</p>
                         <p class="date">
                             Додано: ${pet.created_at || ""}
