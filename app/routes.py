@@ -22,7 +22,7 @@ def index():
 @app.route("/profile")
 @login_required
 def profile():
-    pets = Pet.query.filter_by(user_id=current_user.get_id()).order_by(Pet.timestamp.desc()).all()
+    pets = Pet.query.filter_by(user_id=current_user).order_by(Pet.timestamp.desc()).all()
     return render_template("profile.html", pets=pets)
 
 
@@ -119,4 +119,5 @@ def pet_form_add():
 @login_required
 def pet_form():
     return render_template("pet_form.html")
+
 
