@@ -22,11 +22,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const photoInput = document.getElementById("photo-input");
     const uploadArea = document.getElementById("upload-area");
-    const photoPreview = document.getElementById("photo-preview");
+    const photoPreview = document.getElementById("photo-preview"); 
 
     const foundRadio = document.getElementById("found");
     const lostRadio = document.getElementById("lost");
 
+    let existingPhotos = []; 
+    let newFiles = [];     
 
     function updatePlaceholder() {
         if (foundRadio.checked) {
@@ -42,23 +44,39 @@ document.addEventListener("DOMContentLoaded", () => {
     lostRadio.addEventListener("change", updatePlaceholder);
     updatePlaceholder();
 
-
     if (uploadArea && photoInput) {
-        uploadArea.addEventListener("click", () => {
-            photoInput.click();
-        });
+        uploadArea.addEventListener("click", () => photoInput.click());
     }
 
-    if (photoInput && photoPreview) {
-        photoInput.addEventListener("change", () => {
-            const file = photoInput.files[0];
-            if (file) {
-                photoPreview.src = URL.createObjectURL(file);
-                photoPreview.style.display = "block";
-            }
-        });
-    }
+    photoInput.addEventListener("change", () => {
+        for (let i = 0; i < photoInput.files.length; i++) {
+            const file = photoInput.files[i];
+            newFiles.push(file);
+            addPhotoPreview(file);
+        }
+    });
 
+    function addPhotoPreview(file, isExisting = false) {
+        const wrapper = document.createElement("div");
+        wrapper.classList.add("photo-wrapper");
+
+        const img = document.createElement("img");
+        img.src = isExisting ? `/static/uploads/${file}` : URL.createObjectURL(file);
+
+        const btnRemove = document.createElement("button");
+        btnRemove.textContent = "×";
+
+        btnRemove.addEventListener("click", () => {
+            wrapper.remove();
+            if (isExisting) existingPhotos = existingPhotos.filter(p => p !== file);
+            else newFiles = newFiles.filter(f => f !== file);
+        });
+
+        wrapper.appendChild(img);
+        wrapper.appendChild(btnRemove);
+        photoPreview.appendChild(wrapper);
+        photoPreview.style.display = "flex";
+    }
 
     if (isEdit) {
         btnSubmit.textContent = "Зберегти";
@@ -68,10 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     async function loadPet() {
         try {
-            const res = await fetch(`/api/pets/${petId}`, {
-                credentials: "include"
-            });
-
+            const res = await fetch(`/api/pets/${petId}`, { credentials: "include" });
             const pet = await res.json();
 
             nameInput.value = pet.name || "";
@@ -81,17 +96,14 @@ document.addEventListener("DOMContentLoaded", () => {
             descriptionInput.value = pet.description || "";
             dateInput.value = pet.date || "";
 
-            if (pet.type === "lost") {
-                lostRadio.checked = true;
-            } else {
-                foundRadio.checked = true;
-            }
+            if (pet.type === "lost") lostRadio.checked = true;
+            else foundRadio.checked = true;
 
             updatePlaceholder();
 
-            if (pet.photo_name) {
-                photoPreview.src = `/static/uploads/${pet.photo_name}`;
-                photoPreview.style.display = "block";
+            if (pet.photos && pet.photos.length > 0) {
+                existingPhotos = [...pet.photos];
+                pet.photos.forEach(photoName => addPhotoPreview(photoName, true));
             }
 
         } catch (err) {
@@ -99,7 +111,6 @@ document.addEventListener("DOMContentLoaded", () => {
             console.error(err);
         }
     }
-
 
     if (form) {
         form.addEventListener("submit", async (e) => {
@@ -120,15 +131,14 @@ document.addEventListener("DOMContentLoaded", () => {
             formData.append("date", dateInput.value);
             formData.append("type", foundRadio.checked ? "found" : "lost");
 
-            if (photoInput.files[0]) {
-                formData.append("photo", photoInput.files[0]);
-            }
+            newFiles.forEach(file => formData.append("photos", file));
+            formData.append("existingPhotos", JSON.stringify(existingPhotos));
 
             if (!isEdit) {
                 formData.append("lat", lat);
                 formData.append("lng", lng);
             }
-            
+
             let url = "/api/pets";
             let method = "POST";
 
@@ -159,10 +169,8 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-
     if (btnDelete) {
         btnDelete.addEventListener("click", async () => {
-
             if (!confirm("Ви впевнені, що хочете видалити?")) return;
 
             try {
@@ -192,5 +200,3 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 });
-
-
