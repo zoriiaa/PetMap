@@ -33,34 +33,53 @@ async function loadUserPets(userId) {
 
             const firstPhoto = pet.photos && pet.photos.length > 0 ? pet.photos[0] : "";
 
-            card.innerHTML = `
-                <div class="pet-left">
-                    <img src="${firstPhoto ? `/static/uploads/${firstPhoto}` : '/static/img/default-pet.png'}" class="pet-image">
-                </div>
-
-                <div class="pet-middle">
-                    <div class="pet-title">
-                        <h3>${pet.name || "Без імені"}</h3>
-                        <span class="status ${pet.status}">
-                            ${pet.status === "lost" ? "Загублена" : "Знайдена"}
-                        </span>
-                        <p class="species">${pet.species}</p>
+           card.innerHTML = `
+                <div class="animal-card">
+            
+                    <img 
+                        src="${firstPhoto ? `/static/uploads/${firstPhoto}` : '/static/img/default-pet.png'}" 
+                        class="animal-photo"
+                    >
+            
+                    <div class="animal-info">
+            
+                        <div class="animal-header">
+                            <h3>${pet.name || "Без імені"}</h3>
+            
+                            <div class="status-badge ${
+                                pet.status === "lost" ? "status-saved" : "status-found"
+                            }">
+                                ${pet.status === "lost" ? "Загублена" : "Знайдена"}
+                            </div>
+                        </div>
+            
+                        <div class="animal-type">
+                            ${pet.species || ""}
+                        </div>
+            
+                        <div class="animal-desc">
+                            ${pet.breed || ""} ${pet.description || ""}
+                        </div>
+            
+                        <div class="animal-date">
+                            Додано: 
+                            <span>${pet.created_at || ""}</span>
+                        </div>
+            
                     </div>
-                    <div class="pet-info">
-                        <p class="bread">${pet.breed || ""}</p>
-                        <p class="description">${pet.description || ""}</p>
-                        <p class="date">
-                            Додано: ${pet.created_at || ""}
-                        </p>
+            
+                    <div class="animal-actions">
+                        <button 
+                            class="btn-edit"
+                            onclick="window.location.href='/pet/edit?id=${pet.id}'"
+                        >
+                            Редагувати
+                        </button>
                     </div>
-                </div>
-
-                <div class="pet-right">
-                    <button onclick="window.location.href='/pet/edit?id=${pet.id}'">
-                        Редагувати
-                    </button>
+            
                 </div>
             `;
+
 
             container.appendChild(card);
         });
@@ -69,6 +88,7 @@ async function loadUserPets(userId) {
         console.error("Помилка:", error);
     }
 }
+
 
 
 
