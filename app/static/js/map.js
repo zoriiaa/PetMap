@@ -188,15 +188,26 @@ document.getElementById("btnFilters").onclick = () => {
 };
 
 document.addEventListener("click", async function (e) {
-    if (e.target.classList.contains("pet-contact")) {
-        const petId = e.target.dataset.id;
+    const btn = e.target.closest(".pet-contact");
+    if (!btn) return;
 
+    const petId = btn.dataset.id;
+
+    try {
         const res = await fetch(`/api/pet/${petId}`);
+        if (!res.ok) {
+            console.error("Помилка запиту:", res.status);
+            return;
+        }
         const data = await res.json();
 
         window.location.href = `mailto:${data.author_email}`;
+    } catch (err) {
+        console.error(err);
     }
 });
+
+
 
 
 
