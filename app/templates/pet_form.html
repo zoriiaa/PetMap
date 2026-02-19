@@ -27,96 +27,95 @@
             </nav>
         </div>
              
-
-
         <div class="content">
-    <div class="form-card">
-
-        <form id="pet-form" enctype="multipart/form-data">
-
-            <div class="status-tabs">
+          <form id="pet-form" enctype="multipart/form-data">
+        
+            <div class="form-wrapper">
+        
+              <div class="status-tabs">
                 <input type="radio" name="statusType" id="found" value="found" checked hidden>
-                <input type="radio" name="statusType" id="lost" value="lost" hidden>
-
                 <label for="found" class="status-tab">Знайдена</label>
+        
+                <input type="radio" name="statusType" id="lost" value="lost" hidden>
                 <label for="lost" class="status-tab">Загублена</label>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group">
-                    <label>Кличка</label>
-                    <input type="text" id="name">
+              </div>
+        
+              <div class="form-card">
+    
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Кличка</label>
+                        <input type="text" id="name">
+                    </div>
+    
+                    <div class="form-group">
+                        <label>Вид *</label>
+                        <select id="species" required>
+                            <option value="Собака">Собака</option>
+                            <option value="Кіт">Кіт</option>
+                            <option value="Інше">Інше</option>
+                        </select>
+                    </div>
                 </div>
-
-                <div class="form-group">
-                    <label>Вид *</label>
-                    <select id="species" required>
-                        <option value="Собака">Собака</option>
-                        <option value="Кіт">Кіт</option>
-                        <option value="Інше">Інше</option>
-                    </select>
+    
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Порода</label>
+                        <input type="text" id="breed">
+                    </div>
+    
+                    <div class="form-group">
+                        <label>Статус *</label>
+                        <select id="status" required>
+                            <option>Тимчасово забрали до себе</option>
+                            <option>Веземо в притулок</option>
+                            <option>Веземо в клініку</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group">
-                    <label>Порода</label>
-                    <input type="text" id="breed">
+    
+                <div class="form-group full-width">
+                    <label>Опис *</label>
+                    <textarea id="description" required></textarea>
                 </div>
-
-                <div class="form-group">
-                    <label>Статус *</label>
-                    <select id="status" required>
-                        <option>Тимчасово забрали до себе</option>
-                        <option>Веземо в притулок</option>
-                        <option>Веземо в клініку</option>
-                    </select>
+    
+                <div class="form-group full-width">
+                    <label>Фото *</label>
+    
+                    <div class="photo-upload" id="upload-area">
+                        <p>Натисніть для завантаження фото</p>
+                        <input type="file" id="photo-input" accept="image/*" multiple hidden>
+    
+                    </div>
+    
+                   <div id="photo-preview"></div>
+    
                 </div>
-            </div>
-
-            <div class="form-group full-width">
-                <label>Опис *</label>
-                <textarea id="description" required></textarea>
-            </div>
-
-            <div class="form-group full-width">
-                <label>Фото *</label>
-
-                <div class="photo-upload" id="upload-area">
-                    <p>Натисніть для завантаження фото</p>
-                    <input type="file" id="photo-input" accept="image/*" hidden>
+    
+    
+                <div class="form-group full-width">
+                    <label>Дата *</label>
+                    <input type="date" id="date" required>
                 </div>
-
-                <img id="photo-preview" style="display:none; max-width:200px; margin-top:10px;">
+    
+                <div class="form-actions">
+                    <button type="button" id="btn-cancel">Скасувати</button>
+                    <button type="submit" id="btn-submit">Додати на карту</button>
+                </div>
+    
+                <div class="danger-zone" id="danger-zone" style="display:none;">
+                    <button type="button" id="btn-delete">Видалити тварину</button>
+                </div>
+              </div>
             </div>
-
-
-            <div class="form-group full-width">
-                <label>Дата *</label>
-                <input type="date" id="date" required>
-            </div>
-
-            <div class="form-actions">
-                <button type="button" id="btn-cancel">Скасувати</button>
-                <button type="submit" id="btn-submit">Додати на карту</button>
-            </div>
-
-            <div class="danger-zone" id="danger-zone" style="display:none;">
-                <button type="button" id="btn-delete">Видалити тварину</button>
-            </div>
-
-        </form>
-
-    </div>
-</div>
-
+          </form>
+        </div>
         <div class="footer">
             <img src="static/img/logo.svg" alt="PetMap Logo" class="logo-icon">
             <span>Pet<span class="map-text">Map</span></span>
         </div>
         
         <script src="{{ url_for('static', filename='js/add.js') }}"></script>
-
-       
+   
     </body>
 </html>
