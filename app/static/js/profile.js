@@ -3,15 +3,17 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!container) return;
 
     const userId = container.dataset.userId;
+    if (!userId) {
+        console.error("USER ID missing");
+        return;
+    }
+    
     console.log("USER ID:", userId);
 
     loadUserPets(userId);
 });
 
-if (!userId) {
-    console.error("USER ID missing");
-    return;
-}
+
 
 
 async function loadUserPets(userId) {
@@ -67,6 +69,7 @@ async function loadUserPets(userId) {
         console.error("Помилка:", error);
     }
 }
+
 
 
 
